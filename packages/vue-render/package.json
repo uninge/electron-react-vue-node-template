@@ -2,15 +2,23 @@
   "name": "vue-render",
 	"version": "0.0.1",
 	"private": "true",
-  "description": "",
-  "main": "index.js",
+	"author": {
+		"name": "vimalakirti",
+		"email": "vimalakirti409@gmail.com"
+	},
+	"description": "",
   "scripts": {
-		"start": "",
-		"build": "",
+		"start": "deveco dev vue-render",
+		"build": "deveco build vue-render",
 		"test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.17.1"
+  "dependencies": {
+    "vue": "~3.5.22"
+  },
+  "devDependencies": {
+    "deveco": "workspace:*"
+  },
+	"packageManager": "pnpm@10.17.1",
+	"keywords": [],
+	"license": "ISC"
 }
