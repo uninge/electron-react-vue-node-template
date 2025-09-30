@@ -1,0 +1,34 @@
+{
+	"name": "deveco",
+	"version": "0.0.1",
+	"private": "true",
+	"author": {
+		"name": "vimalakirti",
+		"email": "vimalakirti409@gmail.com"
+	},
+	"main": "./dist/index.js",
+	"bin": {
+		"deveco": "./bin/index.js"
+	},
+	"scripts": {
+		"start": "tsc --watch",
+		"build": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"@rsbuild/core": "~1.5.12",
+		"rsbuild-electron-dev-plugin": "workspace:*",
+		"@rsbuild/plugin-react": "~1.4.1",
+		"commander": "~14.0.1",
+		"@rspack/plugin-react-refresh": "~1.5.1",
+		"@rspack/dev-server": "~1.1.4",
+		"@rsbuild/plugin-vue": "~1.1.2"
+	},
+	"devDependencies": {
+		"tsconfig": "workspace:*",
+		"@types/node": "~24.6.0",
+		"typescript": "~5.9.2"
+	},
+	"keywords": [],
+	"license": "ISC"
+}
