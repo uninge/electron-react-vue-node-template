@@ -1,0 +1,26 @@
+{
+  "name": "react-render",
+	"version": "0.0.1",
+	"private": "true",
+	"author": {
+		"name": "vimalakirti",
+		"email": "vimalakirti409@gmail.com"
+	},
+	"description": "",
+  "scripts": {
+		"start": "deveco dev react-render",
+		"build": "deveco build react-render",
+		"test": "echo \"Error: no test specified\" && exit 1"
+  },
+	"dependencies": {
+		"react": "~19.1.1",
+		"react-dom": "~19.1.1"
+	},
+  "devDependencies": {
+    "deveco": "workspace:*",
+    "@types/react": "~19.1.16",
+    "@types/react-dom": "~19.1.9"
+  },
+	"keywords": [],
+	"license": "ISC"
+}
