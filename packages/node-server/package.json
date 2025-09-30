@@ -1,0 +1,22 @@
+{
+  "name": "node-server",
+	"version": "0.0.1",
+	"private": "true",
+	"author": {
+		"name": "vimalakirti",
+		"email": "vimalakirti409@gmail.com"
+	},
+	"description": "",
+  "scripts": {
+		"start": "deveco dev node-server",
+		"build": "deveco build node-server",
+		"test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "tsconfig": "workspace:*",
+    "@types/node": "~24.6.0",
+    "deveco": "workspace:*"
+  },
+	"keywords": [],
+	"license": "ISC"
+}

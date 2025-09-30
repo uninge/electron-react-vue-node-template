@@ -1,0 +1,23 @@
+{
+  "name": "vue-render",
+	"version": "0.0.1",
+	"private": "true",
+	"author": {
+		"name": "vimalakirti",
+		"email": "vimalakirti409@gmail.com"
+	},
+	"description": "",
+  "scripts": {
+		"start": "deveco dev vue-render",
+		"build": "deveco build vue-render",
+		"test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "vue": "~3.5.22"
+  },
+  "devDependencies": {
+    "deveco": "workspace:*"
+  },
+	"keywords": [],
+	"license": "ISC"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "tsconfig",
+	"version": "0.0.1",
+	"private": "true",
+	"author": {
+		"name": "vimalakirti",
+		"email": "vimalakirti409@gmail.com"
+	},
+	"description": "",
+	"scripts": {
+		"start": "echo \"tsconfig.json success\"",
+		"build": "echo \"tsconfig.json success\"",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"license": "ISC"
+}
