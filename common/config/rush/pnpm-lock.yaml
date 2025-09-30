@@ -7,3 +7,17 @@ settings:
 importers:
 
   .: {}
+
+  ../../packages/electron-main: {}
+
+  ../../packages/node-server: {}
+
+  ../../packages/react-render: {}
+
+  ../../packages/vue-render: {}
+
+  ../../toolchain/deveco: {}
+
+  ../../toolchain/rsbuild-electron-dev-plugin: {}
+
+  ../../toolchain/tsconfig: {}

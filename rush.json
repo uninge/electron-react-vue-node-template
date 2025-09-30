@@ -440,5 +440,33 @@
     //   "reviewCategory": "tools",
     //   "tags": [ "tools" ]
     // }
+    {
+      "packageName": "electron-main",
+      "projectFolder": "packages/electron-main"
+    },
+    {
+      "packageName": "react-render",
+      "projectFolder": "packages/react-render"
+    },
+    {
+      "packageName": "vue-render",
+      "projectFolder": "packages/vue-render"
+    },
+    {
+      "packageName": "node-server",
+      "projectFolder": "packages/node-server"
+    },
+    {
+      "packageName": "deveco",
+      "projectFolder": "toolchain/deveco"
+    },
+    {
+      "packageName": "tsconfig",
+      "projectFolder": "toolchain/tsconfig"
+    },
+    {
+      "packageName": "rsbuild-electron-dev-plugin",
+      "projectFolder": "toolchain/rsbuild-electron-dev-plugin"
+    }
   ]
 }
