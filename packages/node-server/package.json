@@ -17,7 +17,6 @@
     "@types/node": "~24.6.0",
     "deveco": "workspace:*"
   },
-	"packageManager": "pnpm@10.17.1",
 	"keywords": [],
 	"license": "ISC"
 }

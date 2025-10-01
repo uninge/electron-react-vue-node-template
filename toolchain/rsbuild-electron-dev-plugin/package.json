@@ -20,7 +20,6 @@
 		"electron": "~38.1.2",
 		"tsconfig": "workspace:*"
 	},
-	"packageManager": "pnpm@10.17.1",
 	"keywords": [],
 	"license": "ISC"
 }

@@ -29,7 +29,6 @@
 		"@types/node": "~24.6.0",
 		"typescript": "~5.9.2"
 	},
-	"packageManager": "pnpm@10.17.1",
 	"keywords": [],
 	"license": "ISC"
 }

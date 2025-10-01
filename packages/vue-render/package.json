@@ -18,7 +18,6 @@
   "devDependencies": {
     "deveco": "workspace:*"
   },
-	"packageManager": "pnpm@10.17.1",
 	"keywords": [],
 	"license": "ISC"
 }
