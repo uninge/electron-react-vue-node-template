@@ -37,7 +37,7 @@ export default function rsbuildElectronDevPlugin(config: IStartElectron): Rsbuil
 
 async function startElectron(config: IStartElectron): Promise<ChildProcessWithoutNullStreams> {
 	return new Promise((resolve, reject) => {
-		const argv = ['--trace-warns', `--inspect=${config.inspect}`, config.appPath];
+		const argv = ['--trace-warnings', `--inspect=${config.inspect}`, config.appPath];
 		const childProcess = spawn(config.electron, argv, {
 			cwd: process.cwd(),
 			windowsHide: false,
