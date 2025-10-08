@@ -16,7 +16,8 @@
     "vue": "~3.5.22"
   },
   "devDependencies": {
-    "deveco": "workspace:*"
+    "deveco": "workspace:*",
+    "tsconfig": "workspace:*"
   },
 	"keywords": [],
 	"license": "ISC"
