@@ -8,15 +8,14 @@
 	},
 	"description": "",
   "scripts": {
-		"start": "deveco dev vue-render",
-		"build": "deveco build vue-render",
+		"start": "NODE_ENV=development deveco dev vue-render",
+		"build": "NODE_ENV=production deveco build vue-render",
 		"test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "vue": "~3.5.22"
-  },
   "devDependencies": {
-    "deveco": "workspace:*"
+    "deveco": "workspace:*",
+    "tsconfig": "workspace:*",
+    "vue": "~3.5.22"
   },
 	"keywords": [],
 	"license": "ISC"
