@@ -1,13 +1,14 @@
-import path from 'node:path';
 import { mergeRsbuildConfig } from '@rsbuild/core'
 import type { RsbuildConfig } from '@rsbuild/core'
 import {baseConfig} from "./base.config";
+import {electronPreloadScript, electronProdEntry} from "../common/module.path";
 
 export const electronBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	mode: 'development',
 	source: {
 		entry: {
-			index: path.resolve(process.cwd(), 'src', 'index.ts'),
+			index: [electronProdEntry],
+			preload: [electronPreloadScript],
 		}
 	},
 	output: {

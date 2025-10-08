@@ -3,25 +3,29 @@
 	"include": ["**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"],
 	"compilerOptions": {
-		"lib": [
-			"es2024",
-			"ESNext.Array",
-			"ESNext.Collection",
-			"ESNext.Iterator",
-			"ESNext.Promise"
-		],
-		"module": "nodenext",
-		"target": "es2024",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+
+		"target": "ES2024",
+		"lib": ["DOM", "ES2024", "ESNext.Array", "ESNext.Collection", "ESNext.Iterator", "ESNext.Promise"],
 
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"moduleResolution": "node16",
 		"resolveJsonModule": true,
 		"declaration": true,
 
 		"rewriteRelativeImportExtensions": true,
 		"erasableSyntaxOnly": true,
-		"verbatimModuleSyntax": false,
+		"verbatimModuleSyntax": true,
+	},
+
+	"tsc-alias": {
+		"verbose": true,
+		"resolveFullPaths": true,
+		"fileExtensions": {
+			"inputGlob": "{js,jsx,mjs}",
+			"outputCheck": ["js", "json", "jsx", "mjs"]
+		}
 	}
 }

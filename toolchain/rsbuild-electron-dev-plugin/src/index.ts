@@ -1,6 +1,7 @@
 import { spawn } from 'node:child_process';
 import type { ChildProcessWithoutNullStreams } from 'node:child_process'
 import type { RsbuildPlugin } from '@rsbuild/core'
+import { printElectronLog } from './utils/printer'
 
 export interface IStartElectron {
 	electron: string;
@@ -56,11 +57,11 @@ function killElectronProcess(pid?: number) {
 }
 
 function onElectronProcessStdout(chunk: Uint8Array) {
-	console.log('stdout: ', chunk.toString());
+	printElectronLog(chunk, 'cyan')
 }
 
 function onElectronProcessStderr(chunk: Uint8Array) {
-	console.log('stderr: ', chunk.toString());
+	printElectronLog(chunk, 'red')
 }
 
 function onElectronProcessClose(code: number) {
