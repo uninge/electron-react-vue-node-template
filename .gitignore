@@ -114,6 +114,8 @@ lib-esnext/
 lib-commonjs/
 lib-shim/
 dist/
+output/
+release/
 dist-storybook/
 *.tsbuildinfo
 
