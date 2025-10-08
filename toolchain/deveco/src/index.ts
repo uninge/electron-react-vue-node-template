@@ -1,3 +1,5 @@
+require('./common/helpler').getCustomConfig();
+
 import {Command} from "commander";
 import {PROJECT_REPO} from "./common/constant";
 import {runElectronDev, runElectronProd} from "./runner/electron";
@@ -32,8 +34,6 @@ import {runNodeDev, runNodeProd} from "./runner/node";
 async function startDev(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO], options: Record<string, string>): Promise<void> {
 	switch (project) {
 		case PROJECT_REPO.ELECTRON_MAIN:
-			process.env.CUSTOM_RENDER_HOST = '127.0.0.1'
-			process.env.CUSTOM_RENDER_PROT = '3000'
 			await runElectronDev();
 			break;
 		case PROJECT_REPO.REACT_RENDER:
@@ -54,8 +54,6 @@ async function startDev(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO],
 async function startProd(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO], options: Record<string, string>): Promise<void> {
 	switch (project) {
 		case PROJECT_REPO.ELECTRON_MAIN:
-			process.env.CUSTOM_RENDER_HOST = '127.0.0.1'
-			process.env.CUSTOM_RENDER_PROT = '3000'
 			await runElectronProd();
 			break;
 		case PROJECT_REPO.REACT_RENDER:

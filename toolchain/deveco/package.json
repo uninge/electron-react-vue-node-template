@@ -22,7 +22,8 @@
 		"commander": "~14.0.1",
 		"@rspack/plugin-react-refresh": "~1.5.1",
 		"@rspack/dev-server": "~1.1.4",
-		"@rsbuild/plugin-vue": "~1.1.2"
+		"@rsbuild/plugin-vue": "~1.1.2",
+		"change-case": "~5.4.4"
 	},
 	"devDependencies": {
 		"tsconfig": "workspace:*",
