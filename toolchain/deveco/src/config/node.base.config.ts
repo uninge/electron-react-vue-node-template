@@ -1,13 +1,13 @@
-import path from 'node:path';
 import { mergeRsbuildConfig } from '@rsbuild/core'
 import type { RsbuildConfig } from '@rsbuild/core'
 import {baseConfig} from "./base.config";
+import {nodeEntry} from "../common/module.path";
 
 export const nodeBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	mode: 'production',
 	source: {
 		entry: {
-			index: path.resolve(process.cwd(), 'src', 'index.ts'),
+			index: [nodeEntry],
 		}
 	},
 	output: {

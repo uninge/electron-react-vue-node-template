@@ -1,18 +1,23 @@
-import path from 'node:path';
 import { mergeRsbuildConfig } from '@rsbuild/core'
 import type { RsbuildConfig } from '@rsbuild/core'
 import {pluginReact} from "@rsbuild/plugin-react";
 import {baseConfig} from "./base.config";
+import {reactEntry, reactTemplate} from "../common/module.path";
 
 export const reactBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	mode: 'production',
 	source: {
 		entry: {
-			index: path.resolve(process.cwd(), 'src', 'index.tsx'),
+			index: [reactEntry],
 		}
 	},
 	output: {
 		target: 'web',
+		assetPrefix: './',
+		externals: {
+			// 'react': 'React',
+			// 'react-dom': 'ReactDOM',
+		},
 	},
 	tools: {
 		rspack: {
@@ -20,7 +25,7 @@ export const reactBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 		}
 	},
 	html: {
-		template: path.resolve(process.cwd(), 'public', 'index.html'),
+		template: [reactTemplate],
 	},
 	plugins: [pluginReact()]
 })

@@ -1,9 +1,7 @@
+await (await import('./common/helper')).setEnv();
+
 import {Command} from "commander";
 import {PROJECT_REPO} from "./common/constant";
-import {runElectronDev, runElectronProd} from "./runner/electron";
-import {runReactDev, runReactProd} from "./runner/react";
-import {runVueDev, runVueProd} from "./runner/vue";
-import {runNodeDev, runNodeProd} from "./runner/node";
 
 (async function setup() {
 	const program = new Command();
@@ -28,22 +26,19 @@ import {runNodeDev, runNodeProd} from "./runner/node";
 	program.parse();
 })()
 
-
 async function startDev(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO], options: Record<string, string>): Promise<void> {
 	switch (project) {
 		case PROJECT_REPO.ELECTRON_MAIN:
-			process.env.CUSTOM_RENDER_HOST = '127.0.0.1'
-			process.env.CUSTOM_RENDER_PROT = '3000'
-			await runElectronDev();
+			await (await import('./runner/electron')).runElectronDev();
 			break;
 		case PROJECT_REPO.REACT_RENDER:
-			await runReactDev();
+			await (await import('./runner/react')).runReactDev();
 			break;
 		case PROJECT_REPO.VUE_RENDER:
-			await runVueDev();
+			await (await import('./runner/vue')).runVueDev();
 			break;
 		case PROJECT_REPO.NODE_SERVER:
-			await runNodeDev();
+			await (await import('./runner/node')).runNodeDev();
 			break;
 		default:
 			console.log(`Unknown project ${project}`);
@@ -54,18 +49,16 @@ async function startDev(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO],
 async function startProd(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO], options: Record<string, string>): Promise<void> {
 	switch (project) {
 		case PROJECT_REPO.ELECTRON_MAIN:
-			process.env.CUSTOM_RENDER_HOST = '127.0.0.1'
-			process.env.CUSTOM_RENDER_PROT = '3000'
-			await runElectronProd();
+			await (await import('./runner/electron')).runElectronProd();
 			break;
 		case PROJECT_REPO.REACT_RENDER:
-			await runReactProd();
+			await (await import('./runner/react')).runReactProd();
 			break;
 		case PROJECT_REPO.VUE_RENDER:
-			await runVueProd();
+			await (await import('./runner/vue')).runVueProd();
 			break;
 		case PROJECT_REPO.NODE_SERVER:
-			await runNodeProd();
+			await (await import('./runner/node')).runNodeProd();
 			break;
 		default:
 			console.log(`Unknown project ${project}`);
