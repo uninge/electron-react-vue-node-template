@@ -2,23 +2,30 @@
   "name": "electron-main",
 	"version": "0.0.1",
 	"private": "true",
+	"main": "dist/index.js",
 	"author": {
 		"name": "vimalakirti",
 		"email": "vimalakirti409@gmail.com"
 	},
 	"description": "",
   "scripts": {
-		"start": "deveco dev electron-main",
-		"build": "deveco build electron-main",
-    "test": "echo \"Error: no test specified\" && exit 1"
+		"start": "NODE_ENV=development CUSTOM_RENDER_PROJECT=react-render deveco dev electron-main",
+		"build": "NODE_ENV=production CUSTOM_RENDER_PROJECT=react-render deveco build electron-main",
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"builder": "node builder.js"
   },
 	"dependencies": {
-		"electron": "~38.2.0"
+		"electron-log": "~5.4.3",
+		"react-render": "workspace:*"
 	},
   "devDependencies": {
     "tsconfig": "workspace:*",
     "@types/node": "~24.6.0",
-    "deveco": "workspace:*"
+    "deveco": "workspace:*",
+    "electron-debug": "~4.1.0",
+    "electron-devtools-installer": "~4.0.0",
+    "electron-builder": "~26.0.12",
+    "electron": "~38.3.0"
   },
 	"keywords": [],
 	"license": "ISC"
