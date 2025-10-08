@@ -8,18 +8,17 @@
 	},
 	"description": "",
   "scripts": {
-		"start": "deveco dev react-render",
-		"build": "deveco build react-render",
+		"start": "NODE_ENV=development deveco dev react-render",
+		"build": "NODE_ENV=production deveco build react-render",
 		"test": "echo \"Error: no test specified\" && exit 1"
   },
-	"dependencies": {
-		"react": "~19.1.1",
-		"react-dom": "~19.1.1"
-	},
   "devDependencies": {
     "deveco": "workspace:*",
     "@types/react": "~19.1.16",
-    "@types/react-dom": "~19.1.9"
+    "@types/react-dom": "~19.1.9",
+    "tsconfig": "workspace:*",
+    "react": "~19.2.0",
+    "react-dom": "~19.2.0"
   },
 	"keywords": [],
 	"license": "ISC"
