@@ -1,5 +1,6 @@
 {
 	"name": "deveco",
+	"type": "module",
 	"version": "0.0.1",
 	"private": "true",
 	"author": {
@@ -11,8 +12,8 @@
 		"deveco": "./bin/index.js"
 	},
 	"scripts": {
-		"start": "tsc --watch",
-		"build": "tsc",
+		"start": "concurrently 'tsc --watch' 'tsc-alias --watch'",
+		"build": "tsc && tsc-alias",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {
@@ -22,7 +23,9 @@
 		"commander": "~14.0.1",
 		"@rspack/plugin-react-refresh": "~1.5.1",
 		"@rspack/dev-server": "~1.1.4",
-		"@rsbuild/plugin-vue": "~1.1.2"
+		"@rsbuild/plugin-vue": "~1.1.2",
+		"tsc-alias": "~1.8.16",
+		"concurrently": "~9.2.1"
 	},
 	"devDependencies": {
 		"tsconfig": "workspace:*",

@@ -1,18 +1,19 @@
-import path from 'node:path';
 import { mergeRsbuildConfig } from '@rsbuild/core'
 import type { RsbuildConfig } from '@rsbuild/core'
 import {baseConfig} from "./base.config";
 import {pluginVue} from "@rsbuild/plugin-vue";
+import {vueEntry, vueTemplate} from "../common/module.path";
 
 export const vueBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	mode: 'production',
 	source: {
 		entry: {
-			index: path.resolve(process.cwd(), 'src', 'index.ts'),
+			index: [vueEntry],
 		}
 	},
 	output: {
 		target: 'web',
+		assetPrefix: './',
 	},
 	tools: {
 		rspack: {
@@ -20,7 +21,7 @@ export const vueBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 		}
 	},
 	html: {
-		template: path.resolve(process.cwd(), 'public', 'index.html'),
+		template: [vueTemplate],
 	},
 	plugins: [pluginVue()]
 })
