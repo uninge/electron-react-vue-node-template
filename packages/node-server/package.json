@@ -1,5 +1,6 @@
 {
   "name": "node-server",
+	"type": "module",
 	"version": "0.0.1",
 	"private": "true",
 	"author": {
@@ -8,8 +9,8 @@
 	},
 	"description": "",
   "scripts": {
-		"start": "deveco dev node-server",
-		"build": "deveco build node-server",
+		"start": "NODE_ENV=development deveco dev node-server",
+		"build": "NODE_ENV=production deveco build node-server",
 		"test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
