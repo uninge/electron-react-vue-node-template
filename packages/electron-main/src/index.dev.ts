@@ -1,7 +1,8 @@
 import { app } from 'electron';
 import electronLog from 'electron-log';
 import electronDebug from 'electron-debug';
-import installExtension, {
+import {
+	installExtension,
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS,
   MOBX_DEVTOOLS,
@@ -11,32 +12,35 @@ import { mark, performanceStart, performanceEnd } from './utils/performance';
 
 performanceStart();
 
-mark('dev-start');
+(async function devSetup() {
 
-await app.whenReady();
+	mark('dev-start');
 
-electronDebug({ showDevTools: true });
+	await app.whenReady();
 
-/** ************** extensions start *************** */
-const results = await Promise.allSettled([
-	installExtension(REACT_DEVELOPER_TOOLS),
-	installExtension(REDUX_DEVTOOLS),
-	installExtension(MOBX_DEVTOOLS),
-	installExtension(VUEJS_DEVTOOLS),
-]);
+	electronDebug({ showDevTools: true });
 
-results.forEach((result) => {
-	if (result.status === 'fulfilled') {
-		electronLog.info(`Added Extension: ${result.value}`);
-	}
-	if (result.status === 'rejected') {
-		electronLog.error('An error occurred when added extension: ', result.reason);
-	}
-});
-/** ************** extensions end *************** */
+	/** ************** extensions start *************** */
+	const results = await Promise.allSettled([
+		installExtension(REACT_DEVELOPER_TOOLS),
+		installExtension(REDUX_DEVTOOLS),
+		installExtension(MOBX_DEVTOOLS),
+		installExtension(VUEJS_DEVTOOLS),
+	]);
 
-mark('dev-end');
+	results.forEach((result) => {
+		if (result.status === 'fulfilled') {
+			electronLog.info(`Added Extension: [${result.value.name}@${result.value.version}]`);
+		}
+		if (result.status === 'rejected') {
+			electronLog.error('An error occurred when added extension: ', result.reason);
+		}
+	});
+	/** ************** extensions end *************** */
 
-electronLog.info('Dev Ready');
+	mark('dev-end');
 
-performanceEnd();
+	electronLog.info('Dev Ready');
+
+	performanceEnd();
+})()
