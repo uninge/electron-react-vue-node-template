@@ -1,10 +1,10 @@
-const path = require('node:path');
-const { name, version } = require('./package.json');
+import path from "path";
+// const { name, version } = require('./package.json');
 
-module.exports = {
+export default {
 	setEnv: async () => {
-		process.env.CUSTOM_APP_NAME = name;
-		process.env.CUSTOM_APP_VERSION = version;
+		process.env.CUSTOM_APP_NAME = 'name';
+		process.env.CUSTOM_APP_VERSION = 'version';
 
 		if (process.env.NODE_ENV === 'development') {
 			process.env.CUSTOM_RENDER_DEV_HOST = '127.0.0.1'
@@ -13,7 +13,7 @@ module.exports = {
 	},
 	getMainConfig: async () => {
 		return {
-			electron: require('electron'),
+			electron: (await import('electron')).default,
 			inspect: 28256,
 			appPath: path.join(process.cwd(), 'dist', 'index.js'),
 		}

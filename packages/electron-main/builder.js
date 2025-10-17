@@ -17,19 +17,20 @@ const options = {
 		'!.editorconfig',
 
 		'!**/*.ts',
-		'!**/react-render/**/src/*',
-		'!**/vue-render/**/src/*',
-		'!**/node-server/**/src/*',
-		'!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}',
-		'!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}',
+
+		'!**/node_modules/react-render/**/src/*',
+		'!**/node_modules/vue-render/**/src/*',
+		'!**/node_modules/node-server/**/src/*',
+
 		'!**/node_modules/*.d.ts',
 		'!**/node_modules/.bin',
+
+		'!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}',
+		'!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}',
+
+		'!**/{._*,*.log,*.yml,tsconfig.json}',
 		'!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}',
-		'!**/._*',
-		'!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}',
-		'!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}',
-		'!**/{appveyor.yml,.travis.yml,circle.yml}',
-		'!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json,tsconfig.json,.ferryrc.js,windi.config.js}',
+		'!**/{.DS_Store,.idea,.vscode,.git,.vs,.github,.gitignore,.gitattributes,.editorconfig}',
 	],
 	protocols: {
 		name: "Deeplink Example",
