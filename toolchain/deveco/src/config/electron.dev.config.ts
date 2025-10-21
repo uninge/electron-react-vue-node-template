@@ -9,9 +9,7 @@ const customMianConfig = (await getMainCustomConfig())?.main;
 export const electronDevConfig: RsbuildConfig = mergeRsbuildConfig(electronBaseConfig, {
 	mode: 'development',
 	source: {
-		...electronBaseConfig.source,
 		entry: {
-			...electronBaseConfig.source?.entry,
 			index: [electronDevEntry, electronProdEntry],
 		}
 	},
