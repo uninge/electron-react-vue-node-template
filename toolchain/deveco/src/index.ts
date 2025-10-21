@@ -27,6 +27,8 @@ import {PROJECT_REPO} from "./common/constant";
 })()
 
 async function startDev(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO], options: Record<string, string>): Promise<void> {
+	process.env.CUSTOM_PROJECT = project;
+
 	switch (project) {
 		case PROJECT_REPO.ELECTRON_MAIN:
 			await (await import('./runner/electron')).runElectronDev();
@@ -47,6 +49,8 @@ async function startDev(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO],
 }
 
 async function startProd(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO], options: Record<string, string>): Promise<void> {
+	process.env.CUSTOM_PROJECT = project;
+
 	switch (project) {
 		case PROJECT_REPO.ELECTRON_MAIN:
 			await (await import('./runner/electron')).runElectronProd();

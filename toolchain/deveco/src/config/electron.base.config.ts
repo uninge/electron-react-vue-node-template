@@ -7,12 +7,12 @@ export const electronBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, 
 	mode: 'development',
 	source: {
 		entry: {
-			index: [electronProdEntry],
 			preload: [electronPreloadScript],
 		}
 	},
 	output: {
 		target: 'node',
+		module: true,
 	},
 	tools: {
 		rspack: {
