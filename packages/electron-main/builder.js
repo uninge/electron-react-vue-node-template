@@ -1,5 +1,9 @@
-const builder = require("electron-builder")
-const Platform = builder.Platform
+import builder from 'electron-builder';
+const Platform = builder.Platform;
+
+// Configure mirror for Electron downloads
+process.env.ELECTRON_MIRROR = 'https://npmmirror.com/mirrors/electron/';
+process.env.ELECTRON_BUILDER_BINARIES_MIRROR = 'https://npmmirror.com/mirrors/electron-builder-binaries/';
 
 // Let's get that intellisense working
 /**
@@ -7,6 +11,11 @@ const Platform = builder.Platform
  * @see https://www.electron.build/configuration
  */
 const options = {
+	// Application metadata
+	appId: 'com.electron.main',
+	productName: 'Electron App',
+
+	// Files configuration
 	files: [
 		'dist',
 		'assets',
@@ -32,63 +41,106 @@ const options = {
 		'!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}',
 		'!**/{.DS_Store,.idea,.vscode,.git,.vs,.github,.gitignore,.gitattributes,.editorconfig}',
 	],
-	protocols: {
-		name: "Deeplink Example",
-		schemes: [
-			"deeplink"
-		]
-	},
-	asar: false,
-	compression: "normal",
-	removePackageScripts: true,
 
+	// ASAR configuration (recommended for production)
+	asar: true,
+	compression: 'maximum',
+
+	// Build options
+	removePackageScripts: true,
 	nodeGypRebuild: false,
 	buildDependenciesFromSource: false,
 
+	// Directories
 	directories: {
-		output: "release",
-		buildResources: "dist"
+		output: 'release',
+		buildResources: 'assets',
 	},
+
+	// macOS configuration
 	mac: {
-		target: 'dmg',
+		target: 'zip',
+		category: 'public.app-category.developer-tools',
+		icon: 'assets/icon.icns',
 		hardenedRuntime: true,
-		gatekeeperAssess: true,
+		gatekeeperAssess: false,
+		darkModeSupport: true,
+		artifactName: '${productName}-${version}-${arch}.${ext}',
 		extendInfo: {
 			NSAppleEventsUsageDescription: 'Let me use Apple Events.',
 			NSCameraUsageDescription: 'Let me use the camera.',
 			NSScreenCaptureDescription: 'Let me take screenshots.',
-		}
+		},
 	},
+
+	// DMG configuration
 	dmg: {
 		iconSize: 100,
 		contents: [
 			{
 				x: 255,
 				y: 85,
-				type: "file"
+				type: 'file',
 			},
 			{
 				x: 253,
 				y: 325,
-				type: "link",
-				path: "/Applications"
-			}
+				type: 'link',
+				path: '/Applications',
+			},
 		],
 		window: {
 			width: 500,
-			height: 500
-		}
+			height: 500,
+		},
+	},
+
+	// Windows configuration
+	win: {
+		target: [
+			{
+				target: 'nsis',
+				arch: ['x64', 'ia32'],
+			},
+			{
+				target: 'portable',
+				arch: ['x64'],
+			},
+		],
+		icon: 'assets/icon.ico',
+	},
+
+	// NSIS installer configuration
+	nsis: {
+		oneClick: false,
+		allowToChangeInstallationDirectory: true,
+		createDesktopShortcut: true,
+		createStartMenuShortcut: true,
+		shortcutName: 'Electron App',
+	},
+
+	// Linux configuration
+	linux: {
+		target: ['AppImage', 'deb'],
+		category: 'Utility',
+		icon: 'assets/icon.png',
+	},
+
+	// Protocols
+	protocols: {
+		name: 'Deeplink Example',
+		schemes: ['deeplink'],
 	},
 };
 
 builder
 	.build({
 		targets: Platform.MAC.createTarget(),
-		config: options
+		config: options,
 	})
 	.then((result) => {
-		console.log(JSON.stringify(result))
+		console.log(JSON.stringify(result));
 	})
 	.catch((error) => {
-		console.error(error)
-	})
+		console.error(error);
+	});

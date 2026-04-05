@@ -3,9 +3,9 @@ import electronLog from 'electron-log';
 import electronDebug from 'electron-debug';
 import {
 	installExtension,
-  REACT_DEVELOPER_TOOLS,
-  REDUX_DEVTOOLS,
-  MOBX_DEVTOOLS,
+	REACT_DEVELOPER_TOOLS,
+	REDUX_DEVTOOLS,
+	MOBX_DEVTOOLS,
 	VUEJS_DEVTOOLS,
 } from 'electron-devtools-installer';
 import { mark, performanceStart, performanceEnd } from './utils/performance';
@@ -13,7 +13,6 @@ import { mark, performanceStart, performanceEnd } from './utils/performance';
 performanceStart();
 
 (async function devSetup() {
-
 	mark('dev-start');
 
 	await app.whenReady();
@@ -44,3 +43,5 @@ performanceStart();
 
 	performanceEnd();
 })()
+	.then(console.info)
+	.catch(console.error);

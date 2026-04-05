@@ -10,4 +10,4 @@ export const APP_INFO = (process.env.APP_INFO ?? {}) as unknown as {
 	branch: string;
 	message: string;
 	hash: string;
-}
+};

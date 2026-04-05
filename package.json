@@ -1,0 +1,52 @@
+{
+	"$schema": "https://json.schemastore.org/package.json",
+	"name": "electron-react-vue-node-template",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Electron React Vue Node Template - A modern Electron application template with Rush monorepo",
+	"author": {
+		"name": "vimalakirti",
+		"email": "vimalakirti409@gmail.com"
+	},
+	"scripts": {
+		"update": "rush update",
+		"build": "rush build",
+		"rebuild": "rush rebuild",
+		"clean": "rush clean",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+		"format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+		"postinstall": "rush install && rush build && rush update"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.0.0",
+		"typescript-eslint": "^8.0.0",
+		"eslint": "^9.0.0",
+		"eslint-config-prettier": "^9.0.0",
+		"prettier": "^3.0.0",
+		"typescript": "^5.9.2"
+	},
+	"keywords": [
+		"electron",
+		"react",
+		"vue",
+		"typescript",
+		"rush",
+		"monorepo",
+		"rsbuild"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/uninge/electron-react-vue-node-template.git"
+	},
+	"bugs": {
+		"url": "https://github.com/uninge/electron-react-vue-node-template/issues"
+	},
+	"homepage": "https://github.com/uninge/electron-react-vue-node-template#readme",
+	"engines": {
+		"node": ">=18.20.3 || >=20.14.0",
+		"pnpm": ">=8.15.0"
+	},
+	"license": "ISC"
+}

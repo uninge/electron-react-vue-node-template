@@ -1,14 +1,14 @@
 {
 	"extends": "tsconfig/tsconfig.json",
 	"compilerOptions": {
-    "lib": ["DOM"],
-    "module": "ESNext",
-    "jsx": "react-jsx",
-    "strict": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "bundler"
-  },
-  "include": ["src"]
+		"lib": ["DOM"],
+		"module": "ESNext",
+		"jsx": "react-jsx",
+		"strict": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"moduleResolution": "bundler"
+	},
+	"include": ["src"]
 }

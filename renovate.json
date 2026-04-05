@@ -1,0 +1,37 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:base", ":semanticCommits", ":semanticCommitTypeAll(chore)"],
+	"labels": ["dependencies"],
+	"schedule": ["every weekend"],
+	"rangeStrategy": "bump",
+	"node": {
+		"enabled": true
+	},
+	"packageRules": [
+		{
+			"matchPackagePatterns": ["electron"],
+			"groupName": "electron packages"
+		},
+		{
+			"matchPackagePatterns": ["react", "react-dom"],
+			"groupName": "react packages"
+		},
+		{
+			"matchPackagePatterns": ["vue"],
+			"groupName": "vue packages"
+		},
+		{
+			"matchPackagePatterns": ["@rsbuild", "@rspack"],
+			"groupName": "rsbuild packages"
+		},
+		{
+			"matchDepTypes": ["devDependencies"],
+			"automerge": true
+		}
+	],
+	"ignoreDeps": [],
+	"lockFileMaintenance": {
+		"enabled": true,
+		"schedule": ["before 5am on Monday"]
+	}
+}

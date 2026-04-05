@@ -1,23 +1,25 @@
 import chalk from 'chalk';
-import type { ForegroundColorName } from 'chalk'
+import type { ForegroundColorName } from 'chalk';
 
-export function printElectronLog(data: Uint8Array, color: ForegroundColorName) {
-	let log = '';
-	const arr = data.toString().split(/\r?\n/);
-	arr.forEach((line) => {
-		line = line.replace(/\r?\n/gm, '').trim();
-		if (line) {
-			log += `  ${line}\n`;
-		}
-	});
-	chalk.red
-	if (/[0-9A-z]+/.test(log)) {
-		console.log(
-			chalk[color].bold('┏ Electron ---------------------------') +
-			'\n' +
-			log.replace(/^(\r?\n)*/, '').replace(/(\r?\n)*&/, '') +
-			chalk[color].bold('┗ ------------------------------------'),
-		);
+export function printElectronLog(data: Uint8Array, color: ForegroundColorName): void {
+	const text = data.toString();
+	const lines = text.split(/\r?\n/).filter((line) => line.trim());
+
+	if (lines.length === 0) {
+		return;
 	}
-}
 
+	const formattedLog = lines.map((line) => `  ${line.trim()}`).join('\n');
+
+	if (!/[a-zA-Z0-9]/.test(formattedLog)) {
+		return;
+	}
+
+	console.log(
+		chalk[color].bold('┏ Electron ---------------------------') +
+			'\n' +
+			formattedLog +
+			'\n' +
+			chalk[color].bold('┗ ------------------------------------')
+	);
+}

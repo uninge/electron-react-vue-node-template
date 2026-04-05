@@ -1,32 +1,30 @@
 await (await import('./common/helper')).setEnv();
 
-import {Command} from "commander";
-import {PROJECT_REPO} from "./common/constant";
+import { Command } from 'commander';
+import { PROJECT_REPO } from './common/constant';
 
-(async function setup() {
-	const program = new Command();
-	program
-		.command('dev')
-		.description('Run dev...')
-		.argument('<project>')
-		.action((project, options) => {
-			console.log('start dev', project, options);
-			startDev(project, options);
-		});
+const program = new Command();
+program
+	.command('dev')
+	.description('Run dev...')
+	.argument('<project>')
+	.action(async (project, options) => {
+		console.info('start dev', project, options);
+		await startDev(project);
+	});
 
-	program
-		.command('build')
-		.description('Run build...')
-		.argument('<project>')
-		.action((project, options) => {
-			console.log('start build', project, options);
-			startProd(project, options);
-		});
+program
+	.command('build')
+	.description('Run build...')
+	.argument('<project>')
+	.action(async (project, options) => {
+		console.info('start build', project, options);
+		await startProd(project);
+	});
 
-	program.parse();
-})()
+program.parse();
 
-async function startDev(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO], options: Record<string, string>): Promise<void> {
+async function startDev(project: (typeof PROJECT_REPO)[keyof typeof PROJECT_REPO]): Promise<void> {
 	process.env.CUSTOM_PROJECT = project;
 
 	switch (project) {
@@ -43,12 +41,12 @@ async function startDev(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO],
 			await (await import('./runner/node')).runNodeDev();
 			break;
 		default:
-			console.log(`Unknown project ${project}`);
-			break
+			console.info(`Unknown project ${project}`);
+			break;
 	}
 }
 
-async function startProd(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO], options: Record<string, string>): Promise<void> {
+async function startProd(project: (typeof PROJECT_REPO)[keyof typeof PROJECT_REPO]): Promise<void> {
 	process.env.CUSTOM_PROJECT = project;
 
 	switch (project) {
@@ -65,7 +63,7 @@ async function startProd(project: typeof PROJECT_REPO[keyof typeof PROJECT_REPO]
 			await (await import('./runner/node')).runNodeProd();
 			break;
 		default:
-			console.log(`Unknown project ${project}`);
-			break
+			console.info(`Unknown project ${project}`);
+			break;
 	}
 }
