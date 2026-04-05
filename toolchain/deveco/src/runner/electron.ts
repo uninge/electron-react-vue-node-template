@@ -1,22 +1,23 @@
 import type { BuildResult } from '@rsbuild/core';
 import { loadConfig, mergeRsbuildConfig, createRsbuild } from '@rsbuild/core';
-import {electronDevConfig} from "../config/electron.dev.config";
-import {electronProdConfig} from "../config/electron.prod.config";
+import { getElectronDevConfig } from '../config/electron.dev.config';
+import { electronProdConfig } from '../config/electron.prod.config';
 
 export async function runElectronDev(): Promise<BuildResult> {
-	const { content } = await loadConfig()
+	const { content } = await loadConfig();
+	const electronDevConfig = await getElectronDevConfig();
 
 	const build = await createRsbuild({
 		rsbuildConfig: mergeRsbuildConfig(electronDevConfig, content),
 	});
 
 	return await build.build({
-		watch: true
+		watch: true,
 	});
 }
 
 export async function runElectronProd(): Promise<BuildResult> {
-	const { content } = await loadConfig()
+	const { content } = await loadConfig();
 
 	const build = await createRsbuild({
 		rsbuildConfig: mergeRsbuildConfig(electronProdConfig, content),

@@ -1,5 +1,5 @@
 {
-  "name": "vue-render",
+	"name": "vue-render",
 	"version": "0.0.1",
 	"private": "true",
 	"author": {
@@ -7,16 +7,16 @@
 		"email": "vimalakirti409@gmail.com"
 	},
 	"description": "",
-  "scripts": {
+	"scripts": {
 		"start": "NODE_ENV=development deveco dev vue-render",
 		"build": "NODE_ENV=production deveco build vue-render",
 		"test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "devDependencies": {
-    "deveco": "workspace:*",
-    "tsconfig": "workspace:*",
-    "vue": "~3.5.22"
-  },
+	},
+	"devDependencies": {
+		"deveco": "workspace:*",
+		"tsconfig": "workspace:*",
+		"vue": "~3.5.22"
+	},
 	"keywords": [],
 	"license": "ISC"
 }

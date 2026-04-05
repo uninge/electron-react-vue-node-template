@@ -1,5 +1,5 @@
-const builder = require("electron-builder")
-const Platform = builder.Platform
+const builder = require('electron-builder');
+const Platform = builder.Platform;
 
 // Let's get that intellisense working
 /**
@@ -33,21 +33,19 @@ const options = {
 		'!**/{.DS_Store,.idea,.vscode,.git,.vs,.github,.gitignore,.gitattributes,.editorconfig}',
 	],
 	protocols: {
-		name: "Deeplink Example",
-		schemes: [
-			"deeplink"
-		]
+		name: 'Deeplink Example',
+		schemes: ['deeplink'],
 	},
 	asar: false,
-	compression: "normal",
+	compression: 'normal',
 	removePackageScripts: true,
 
 	nodeGypRebuild: false,
 	buildDependenciesFromSource: false,
 
 	directories: {
-		output: "release",
-		buildResources: "dist"
+		output: 'release',
+		buildResources: 'dist',
 	},
 	mac: {
 		target: 'dmg',
@@ -57,7 +55,7 @@ const options = {
 			NSAppleEventsUsageDescription: 'Let me use Apple Events.',
 			NSCameraUsageDescription: 'Let me use the camera.',
 			NSScreenCaptureDescription: 'Let me take screenshots.',
-		}
+		},
 	},
 	dmg: {
 		iconSize: 100,
@@ -65,30 +63,52 @@ const options = {
 			{
 				x: 255,
 				y: 85,
-				type: "file"
+				type: 'file',
 			},
 			{
 				x: 253,
 				y: 325,
-				type: "link",
-				path: "/Applications"
-			}
+				type: 'link',
+				path: '/Applications',
+			},
 		],
 		window: {
 			width: 500,
-			height: 500
-		}
+			height: 500,
+		},
+	},
+	win: {
+		target: [
+			{
+				target: 'nsis',
+				arch: ['x64', 'ia32'],
+			},
+			{
+				target: 'portable',
+				arch: ['x64'],
+			},
+		],
+	},
+	nsis: {
+		oneClick: false,
+		allowToChangeInstallationDirectory: true,
+		createDesktopShortcut: true,
+		createStartMenuShortcut: true,
+	},
+	linux: {
+		target: ['AppImage', 'deb'],
+		category: 'Utility',
 	},
 };
 
 builder
 	.build({
 		targets: Platform.MAC.createTarget(),
-		config: options
+		config: options,
 	})
 	.then((result) => {
-		console.log(JSON.stringify(result))
+		console.log(JSON.stringify(result));
 	})
 	.catch((error) => {
-		console.error(error)
-	})
+		console.error(error);
+	});

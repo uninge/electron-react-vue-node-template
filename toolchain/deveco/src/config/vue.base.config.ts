@@ -1,15 +1,15 @@
-import { mergeRsbuildConfig } from '@rsbuild/core'
-import type { RsbuildConfig } from '@rsbuild/core'
-import {baseConfig} from "./base.config";
-import {pluginVue} from "@rsbuild/plugin-vue";
-import {vueEntry, vueTemplate} from "../common/module.path";
+import { mergeRsbuildConfig } from '@rsbuild/core';
+import type { RsbuildConfig } from '@rsbuild/core';
+import { baseConfig } from './base.config';
+import { pluginVue } from '@rsbuild/plugin-vue';
+import { vueEntry, vueTemplate } from '../common/module.path';
 
 export const vueBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	mode: 'production',
 	source: {
 		entry: {
 			index: [vueEntry],
-		}
+		},
 	},
 	output: {
 		target: 'web',
@@ -18,10 +18,15 @@ export const vueBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	tools: {
 		rspack: {
 			// target: 'electron-renderer',
-		}
+		},
 	},
 	html: {
 		template: [vueTemplate],
 	},
-	plugins: [pluginVue()]
-})
+	plugins: [pluginVue()],
+	performance: {
+		chunkSplit: {
+			strategy: 'split-by-experience',
+		},
+	},
+});

@@ -3,14 +3,13 @@ import url from 'node:url';
 import electronLog from 'electron-log';
 import { app, screen, globalShortcut, BrowserWindow } from 'electron';
 import { mark, performanceStart, performanceEnd } from './utils/performance';
-import {NODE_ENV, RENDER_DEV_HOST_NAME, RENDER_DEV_PORT, APP_INFO, RENDER_PROJECT} from './config';
+import { NODE_ENV, RENDER_DEV_HOST_NAME, RENDER_DEV_PORT, APP_INFO, RENDER_PROJECT } from './config';
 // import { banShortcut } from './utils/functions';
 import './config/menu';
 
 performanceStart();
 
-(async function mainSetup() {
-
+async function mainSetup() {
 	mark('main-start');
 
 	let mainWindow: BrowserWindow | null;
@@ -27,7 +26,7 @@ performanceStart();
 	app.setAsDefaultProtocolClient('myapp');
 	app
 		.on('open-url', (event, url) => {
-			event.preventDefault()
+			event.preventDefault();
 			electronLog.log('open-url', event, url);
 		})
 		.on('activate', () => {
@@ -77,12 +76,15 @@ performanceStart();
 				webviewTag: false,
 				webSecurity: true,
 				nodeIntegration: false,
-				contextIsolation: !isDevelopment,
+				contextIsolation: true,
+				sandbox: true,
 				preload: path.join(__dirname, './preload.js'),
 			},
 		});
 
-		mainWindow.webContents.openDevTools();
+		if (isDevelopment) {
+			mainWindow.webContents.openDevTools();
+		}
 
 		mainWindow
 			.on('ready-to-show', () => {
@@ -94,12 +96,13 @@ performanceStart();
 			.on('closed', () => {
 				mainWindow = null;
 			})
-			.webContents
-			.on('did-finish-load', () => {
+			.webContents.on('did-finish-load', () => {
 				mark('main-window-source-load-end');
 				performanceEnd();
 			})
-			.setUserAgent(`${mainWindow.webContents.getUserAgent()} ${APP_INFO.name}/${APP_INFO.version}/${NODE_ENV}/${APP_INFO.hash}`);
+			.setUserAgent(
+				`${mainWindow.webContents.getUserAgent()} ${APP_INFO.name}/${APP_INFO.version}/${NODE_ENV}/${APP_INFO.hash}`
+			);
 
 		mark('main-window-source-load-start');
 
@@ -107,7 +110,7 @@ performanceStart();
 			protocol: isDevelopment ? 'http' : 'file',
 			pathname: isDevelopment ? devPathname : path.join(__dirname, `../node_modules/${RENDER_PROJECT}/dist/index.html`),
 			slashes: true,
-		})
+		});
 
 		mainWindow
 			.loadURL(uri)
@@ -128,4 +131,6 @@ performanceStart();
 	}
 
 	mark('main-end');
-})()
+}
+
+mainSetup().then(console.info).catch(console.error);
