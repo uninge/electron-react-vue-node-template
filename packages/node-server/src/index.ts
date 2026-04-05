@@ -1,3 +1,3 @@
 import path from 'node:path';
 
-console.log(path.resolve(process.cwd(), 'src'));
+console.info(path.resolve(process.cwd(), 'src'));

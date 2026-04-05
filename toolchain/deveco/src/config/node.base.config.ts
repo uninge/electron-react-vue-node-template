@@ -1,14 +1,14 @@
-import { mergeRsbuildConfig } from '@rsbuild/core'
-import type { RsbuildConfig } from '@rsbuild/core'
-import {baseConfig} from "./base.config";
-import {nodeEntry} from "../common/module.path";
+import { mergeRsbuildConfig } from '@rsbuild/core';
+import type { RsbuildConfig } from '@rsbuild/core';
+import { baseConfig } from './base.config';
+import { nodeEntry } from '../common/module.path';
 
 export const nodeBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	mode: 'production',
 	source: {
 		entry: {
 			index: [nodeEntry],
-		}
+		},
 	},
 	output: {
 		target: 'node',
@@ -16,6 +16,14 @@ export const nodeBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	tools: {
 		rspack: {
 			target: 'node',
-		}
-	}
-})
+			output: {
+				library: {
+					type: 'module',
+				},
+			},
+			experiments: {
+				outputModule: true,
+			},
+		},
+	},
+});

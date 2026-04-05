@@ -3,14 +3,14 @@
 	"compilerOptions": {
 		"lib": ["DOM"],
 		"module": "ESNext",
-    "jsx": "preserve",
-    "jsxImportSource": "vue",
-    "strict": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "bundler",
-    "useDefineForClassFields": true,
-  },
-  "include": ["src"]
+		"jsx": "preserve",
+		"jsxImportSource": "vue",
+		"strict": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"moduleResolution": "bundler",
+		"useDefineForClassFields": true
+	},
+	"include": ["src"]
 }

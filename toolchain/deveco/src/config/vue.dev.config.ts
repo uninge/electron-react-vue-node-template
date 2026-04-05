@@ -1,6 +1,6 @@
-import { mergeRsbuildConfig } from '@rsbuild/core'
-import type { RsbuildConfig } from '@rsbuild/core'
-import {vueBaseConfig} from "./vue.base.config";
+import { mergeRsbuildConfig } from '@rsbuild/core';
+import type { RsbuildConfig } from '@rsbuild/core';
+import { vueBaseConfig } from './vue.base.config';
 
 export const vueDevConfig: RsbuildConfig = mergeRsbuildConfig(vueBaseConfig, {
 	mode: 'development',
@@ -9,6 +9,6 @@ export const vueDevConfig: RsbuildConfig = mergeRsbuildConfig(vueBaseConfig, {
 		liveReload: false,
 		client: {
 			overlay: true,
-		}
-	}
-})
+		},
+	},
+});
