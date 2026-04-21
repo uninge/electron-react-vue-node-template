@@ -25,7 +25,8 @@
 		"@rspack/dev-server": "~1.1.4",
 		"@rsbuild/plugin-vue": "~1.1.2",
 		"tsc-alias": "~1.8.16",
-		"concurrently": "~9.2.1"
+		"concurrently": "~9.2.1",
+		"jiti": "^2.0.0"
 	},
 	"devDependencies": {
 		"tsconfig": "workspace:*",
