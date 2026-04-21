@@ -3,6 +3,7 @@ import url from 'node:url';
 import electronLog from 'electron-log';
 import { app, screen, globalShortcut, BrowserWindow } from 'electron';
 import { mark, performanceStart, performanceEnd } from './utils/performance';
+import { startNodeServer, stopNodeServer } from './utils/node-server';
 import { NODE_ENV, RENDER_DEV_HOST_NAME, RENDER_DEV_PORT, APP_INFO, RENDER_PROJECT } from './config';
 // import { banShortcut } from './utils/functions';
 import './config/menu';
@@ -12,8 +13,11 @@ performanceStart();
 async function mainSetup() {
 	mark('main-start');
 
-	let mainWindow: BrowserWindow | null;
 	const isDevelopment = NODE_ENV === 'development';
+	const serverPath = path.join(process.cwd(), 'node_modules', 'node-server', 'dist', 'index.js');
+	await startNodeServer(serverPath, isDevelopment);
+
+	let mainWindow: BrowserWindow | null;
 	const devPathname = `${RENDER_DEV_HOST_NAME}:${RENDER_DEV_PORT}`;
 
 	process.on('unhandledRejection', (error) => {
@@ -55,6 +59,7 @@ async function mainSetup() {
 		})
 		.on('will-quit', () => {
 			globalShortcut.unregisterAll();
+			stopNodeServer();
 		});
 
 	function createWindow() {
