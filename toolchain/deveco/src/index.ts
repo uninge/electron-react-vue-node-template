@@ -3,6 +3,8 @@ await (await import('./common/helper')).setEnv();
 import { Command } from 'commander';
 import { PROJECT_REPO } from './common/constant';
 
+export { defineConfig, type DevecoConfig } from './common/types';
+
 const program = new Command();
 program
 	.command('dev')
