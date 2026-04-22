@@ -13,6 +13,9 @@ importers:
       electron-log:
         specifier: ~5.4.3
         version: 5.4.3
+      node-server:
+        specifier: workspace:*
+        version: link:../node-server
       react-render:
         specifier: workspace:*
         version: link:../react-render
@@ -107,6 +110,9 @@ importers:
       concurrently:
         specifier: ~9.2.1
         version: 9.2.1
+      jiti:
+        specifier: ^2.0.0
+        version: 2.6.0
       rsbuild-electron-dev-plugin:
         specifier: workspace:*
         version: link:../rsbuild-electron-dev-plugin
@@ -2586,7 +2592,7 @@ packages:
   /glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
     engines: {node: '>=12'}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
