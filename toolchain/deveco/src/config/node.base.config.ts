@@ -12,18 +12,11 @@ export const nodeBaseConfig: RsbuildConfig = mergeRsbuildConfig(baseConfig, {
 	},
 	output: {
 		target: 'node',
+		module: true,
 	},
 	tools: {
 		rspack: {
 			target: 'node',
-			output: {
-				library: {
-					type: 'module',
-				},
-			},
-			experiments: {
-				outputModule: true,
-			},
 		},
 	},
 });

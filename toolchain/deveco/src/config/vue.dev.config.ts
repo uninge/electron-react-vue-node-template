@@ -4,6 +4,9 @@ import { vueBaseConfig } from './vue.base.config';
 
 export const vueDevConfig: RsbuildConfig = mergeRsbuildConfig(vueBaseConfig, {
 	mode: 'development',
+	server: {
+		host: '0.0.0.0',
+	},
 	dev: {
 		hmr: true,
 		liveReload: false,

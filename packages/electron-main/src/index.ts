@@ -1,5 +1,6 @@
 import path from 'node:path';
 import url from 'node:url';
+import { fileURLToPath } from 'node:url';
 import electronLog from 'electron-log';
 import { app, screen, globalShortcut, BrowserWindow } from 'electron';
 import { mark, performanceStart, performanceEnd } from './utils/performance';
@@ -7,6 +8,8 @@ import { startNodeServer, stopNodeServer } from './utils/node-server';
 import { NODE_ENV, RENDER_DEV_HOST_NAME, RENDER_DEV_PORT, APP_INFO, RENDER_PROJECT } from './config';
 // import { banShortcut } from './utils/functions';
 import './config/menu';
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 performanceStart();
 
@@ -83,7 +86,7 @@ async function mainSetup() {
 				nodeIntegration: false,
 				contextIsolation: true,
 				sandbox: true,
-				preload: path.join(__dirname, './preload.js'),
+				preload: path.join(dirname, './preload.js'),
 			},
 		});
 
@@ -113,7 +116,7 @@ async function mainSetup() {
 
 		const uri = url.format({
 			protocol: isDevelopment ? 'http' : 'file',
-			pathname: isDevelopment ? devPathname : path.join(__dirname, `../node_modules/${RENDER_PROJECT}/dist/index.html`),
+			pathname: isDevelopment ? devPathname : path.join(dirname, `../node_modules/${RENDER_PROJECT}/dist/index.html`),
 			slashes: true,
 		});
 

@@ -4,6 +4,9 @@ import { reactBaseConfig } from './react.base.config';
 
 export const reactDevConfig: RsbuildConfig = mergeRsbuildConfig(reactBaseConfig, {
 	mode: 'development',
+	server: {
+		host: '0.0.0.0',
+	},
 	dev: {
 		hmr: true,
 		liveReload: false,
