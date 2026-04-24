@@ -4,9 +4,9 @@
 
 ## ✨ 特性
 
-- 🚀 **现代技术栈**: Electron + React 19 / Vue 3.5 + TypeScript 5.9
-- 📦 **Monorepo 架构**: 使用 Rush 管理多包项目
-- ⚡ **极速构建**: 基于 Rsbuild 的快速构建工具链
+- 🚀 **现代技术栈**: Electron + React 19 / Vue 3.5 + TypeScript 5.9 + Rspack 2.0
+- 📦 **Monorepo 架构**: 使用 Rush 5.175 管理，pnpm 10.33 作为包管理器
+- ⚡ **极速构建**: 基于 Rsbuild 2.0 的快速构建工具链
 - 🔧 **自定义工具链**: 内置 deveco CLI 工具
 - 🎨 **双渲染进程支持**: 同时支持 React 和 Vue 渲染进程
 - 🔒 **安全优先**: 内置 Electron 安全最佳实践
@@ -35,8 +35,9 @@
 
 ### 环境要求
 
-- Node.js >= 18.20.3 或 >= 20.14.0
-- pnpm 8.15.8 (由 Rush 自动管理)
+- Node.js >= 20.19.0 或 >= 22.12.0 (不再支持 Node.js 18)
+- pnpm 10.33.1 (由 Rush 自动管理)
+- Rush 5.175.1
 
 ### 安装依赖
 

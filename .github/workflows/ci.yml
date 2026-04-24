@@ -2,9 +2,13 @@ name: CI
 
 on:
   push:
-    branches: ["main", "feat/*"]
+    branches: ['main', 'feat/*']
   pull_request:
-    branches: ["main", "feat/*"]
+    branches: ['main', 'feat/*']
+
+env:
+  RUSH_VERSION: 5.175.1
+  PNPM_VERSION: 10.33.1
 
 jobs:
   lint:
@@ -12,14 +16,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+
+      - name: Verify Node.js version
+        run: |
+          node_version=$(node --version)
+          echo "Node.js version: $node_version"
+          if [[ ! "$node_version" =~ ^v(20\.1[9-9]|20\.[2-9][0-9]|22\.1[2-9]|22\.[2-9][0-9]) ]]; then
+            echo "❌ Node.js version must be >= 20.19.0 or >= 22.12.0"
+            exit 1
+          fi
+          echo "✅ Node.js version is compatible"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
       - name: Install Rush
-        run: npm install -g @microsoft/rush
+        run: npm install -g @microsoft/rush@${{ env.RUSH_VERSION }}
+
+      - name: Verify Rush version
+        run: |
+          rush_version=$(rush --version | grep -oP 'version \K[0-9.]+')
+          echo "Rush version: $rush_version"
+          if [ "$rush_version" != "${{ env.RUSH_VERSION }}" ]; then
+            echo "❌ Rush version mismatch. Expected ${{ env.RUSH_VERSION }}, got $rush_version"
+            exit 1
+          fi
+          echo "✅ Rush version is correct"
+
       - name: Rush Install
         run: rush install
+
       - name: Lint
         run: rush lint || echo "Lint not configured yet"
 
@@ -28,14 +61,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
       - name: Install Rush
-        run: npm install -g @microsoft/rush
+        run: npm install -g @microsoft/rush@${{ env.RUSH_VERSION }}
+
       - name: Rush Install
         run: rush install
+
       - name: Type Check
         run: rush build || echo "Build includes type checking"
 
@@ -46,23 +88,48 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node-version: [18, 20]
+        node-version: [20, 22]
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
+
       - name: Git config user
         uses: snow-actions/git-config-user@v1.0.0
         with:
           name: github-actions[bot]
           email: 1008611+github-actions[bot]@users.noreply.github.com
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Verify Node.js version
+        run: |
+          node_version=$(node --version)
+          echo "Node.js version: $node_version"
+          if [[ ! "$node_version" =~ ^v(20\.1[9-9]|20\.[2-9][0-9]|22\.1[2-9]|22\.[2-9][0-9]) ]]; then
+            echo "❌ Node.js version must be >= 20.19.0 or >= 22.12.0"
+            exit 1
+          fi
+          echo "✅ Node.js version is compatible"
+        shell: bash
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install Rush
+        run: npm install -g @microsoft/rush@${{ env.RUSH_VERSION }}
+
       - name: Verify Change Logs
         run: node common/scripts/install-run-rush.js change --verify
+
       - name: Rush Install
         run: node common/scripts/install-run-rush.js install
+
       - name: Rush rebuild
         run: node common/scripts/install-run-rush.js rebuild --verbose
 
@@ -71,12 +138,65 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
       - name: Install Rush
-        run: npm install -g @microsoft/rush
+        run: npm install -g @microsoft/rush@${{ env.RUSH_VERSION }}
+
       - name: Rush Install
         run: rush install
+
       - name: Security Audit
-        run: rush audit || echo "Audit check completed"
+        run: |
+          echo "Running security audit..."
+          rush audit || echo "⚠️ Security vulnerabilities found"
+
+          echo "Checking for known vulnerabilities in dependencies..."
+          pnpm audit --audit-level=moderate || echo "⚠️ Moderate or higher vulnerabilities found"
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        if: github.event_name == 'pull_request'
+        with:
+          fail-on-severity: moderate
+
+  cache:
+    name: Cache Rush
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install Rush
+        run: npm install -g @microsoft/rush@${{ env.RUSH_VERSION }}
+
+      - name: Cache Rush
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.rush
+            ~/.pnpm-store
+            common/temp/node_modules
+            **/node_modules
+          key: ${{ runner.os }}-rush-${{ env.RUSH_VERSION }}-${{ hashFiles('**/package.json', '**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-rush-${{ env.RUSH_VERSION }}-
+            ${{ runner.os }}-rush-
