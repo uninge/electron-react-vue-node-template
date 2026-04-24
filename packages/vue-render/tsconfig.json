@@ -10,7 +10,8 @@
 		"isolatedModules": true,
 		"resolveJsonModule": true,
 		"moduleResolution": "bundler",
-		"useDefineForClassFields": true
+		"useDefineForClassFields": true,
+		"rootDir": "src"
 	},
 	"include": ["src"]
 }
