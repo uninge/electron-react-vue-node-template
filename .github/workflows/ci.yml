@@ -164,7 +164,7 @@ jobs:
           pnpm audit --audit-level=moderate || echo "⚠️ Moderate or higher vulnerabilities found"
 
       - name: Dependency Review
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@v5
         if: github.event_name == 'pull_request'
         with:
           fail-on-severity: moderate
